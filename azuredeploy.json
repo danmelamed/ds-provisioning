@@ -94,7 +94,7 @@
       "name": "Storage",
       "type": "Microsoft.Resources/deployments",
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(variables('assetLocation'), 'templates/StorageTemplate.json')]" }
       }
     },
@@ -104,7 +104,7 @@
       "type": "Microsoft.Resources/deployments",
       "dependsOn": [ "Microsoft.Resources/deployments/Storage" ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(variables('assetLocation'), 'templates/PasswordGeneratorTemplate.json')]" },
         "parameters": {
           "Password": { "value": "[parameters('management Password')]" },
@@ -118,7 +118,7 @@
       "type": "Microsoft.Resources/deployments",
       "dependsOn": [ "Microsoft.Resources/deployments/Storage" ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(variables('assetLocation'), 'templates/PasswordGeneratorTemplate.json')]" },
         "parameters": {
           "Password": { "value": "[parameters('user Token')]" },
@@ -132,7 +132,7 @@
       "type": "Microsoft.Resources/deployments",
       "dependsOn": [ "Microsoft.Resources/deployments/Storage" ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(variables('assetLocation'), 'templates/PasswordGeneratorTemplate.json')]" },
         "parameters": {
           "Password": { "value": "[parameters('admin Token')]" },
@@ -145,7 +145,7 @@
       "name": "AppInsights",
       "type": "Microsoft.Resources/deployments",
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(variables('assetLocation'), '/templates/AppInsightsTemplate.json')]" }
       }
     },
@@ -154,7 +154,7 @@
       "name": "ServiceBus",
       "type": "Microsoft.Resources/deployments",
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(variables('assetLocation'), '/templates/ServiceBusTemplate.json')]" }
       }
     },
@@ -164,7 +164,7 @@
       "type": "Microsoft.Resources/deployments",
       "dependsOn": [ "Microsoft.Resources/deployments/ServiceBus" ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": {
           "uri": "[concat(variables('assetLocation'), '/templates/EventHubTemplate.json')]",
           "contentVersion": "1.0.0.0"
@@ -183,7 +183,7 @@
       "type": "Microsoft.Resources/deployments",
       "dependsOn": [ "Microsoft.Resources/deployments/ServiceBus" ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": {
           "uri": "[concat(variables('assetLocation'), '/templates/EventHubTemplate.json')]",
           "contentVersion": "1.0.0.0"
@@ -202,7 +202,7 @@
       "type": "Microsoft.Resources/deployments",
       "dependsOn": [ "Microsoft.Resources/deployments/ServiceBus" ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": {
           "uri": "[concat(variables('assetLocation'), '/templates/EventHubTemplate.json')]",
           "contentVersion": "1.0.0.0"
@@ -221,7 +221,7 @@
       "type": "Microsoft.Resources/deployments",
       "dependsOn": [ "Microsoft.Resources/deployments/ServiceBus" ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(variables('assetLocation'), '/templates/EventHubTemplate.json')]" },
         "parameters": {
           "ehName": { "value": "eval" },
@@ -246,7 +246,7 @@
         "Microsoft.Resources/deployments/AdminTokenGenerator"
       ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(variables('assetLocation'), '/templates/WebManageTemplate.json')]" },
         "parameters": {
           "initialExplorationEpsilon": { "value": "[parameters('initial Exploration Epsilon')]" },
@@ -277,7 +277,7 @@
         "Microsoft.Resources/deployments/WebManage"
       ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(reference('Microsoft.Resources/deployments/WebManage').outputs.url.value, '/Deployment/GenerateSASToken?parameters=key=', reference('Microsoft.Resources/deployments/Storage').outputs.userStorageAccountKey.value, ';trainer_size=', parameters('online Trainer VM Size'))]" }
       }
     },
@@ -292,7 +292,7 @@
         "Microsoft.Resources/deployments/SecureSettingsUri"
       ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(variables('assetLocation'), '/templates/WebAPITemplate.json')]" },
         "parameters": {
           "instrumentationKey": { "value": "[reference('Microsoft.Resources/deployments/AppInsights').outputs.instrumentationKey.value]" },
@@ -313,7 +313,7 @@
         "Microsoft.Resources/deployments/EventHubJoined"
       ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(variables('assetLocation'), '/templates/StreamAnalyticsJoinTemplate.json')]" },
         "parameters": {
           "assetLocation": { "value": "[variables('assetLocation')]" },
@@ -338,7 +338,7 @@
         "Microsoft.Resources/deployments/EventHubEval"
       ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": { "uri": "[concat(variables('assetLocation'), '/templates/StreamAnalyticsEvalTemplate.json')]" },
         "parameters": {
           "assetLocation": { "value": "[variables('assetLocation')]" },
@@ -364,7 +364,7 @@
         "Microsoft.Resources/deployments/SecureSettingsUri"
       ],
       "properties": {
-        "mode": "incremental",
+        "mode": "Complete",
         "templateLink": {
           "uri": "[concat(variables('assetLocation'), 'templates/OnlineTrainerTemplate.json')]",
           "contentVersion": "1.0.0.0"
